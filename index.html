@@ -11,7 +11,7 @@ window.addEventListener('error',function(e){var t=e&&e.target;if(t&&t!==window&&
 </script>
 <script src="https://builder.puter.com/runtime.js" defer></script>
 <meta name="theme-color" content="#c9768e" />
-<title>Aira Paulyn's Debut | 18th </title>
+<title>Aira Paulyn's Debut | 18th</title>
 <meta name="description" content="You are cordially invited to celebrate the debut of Aira Paulyn — Saturday, September 12, 2026 · Boss Bebeh Bistro Café, Talisay Branch." />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,7 +63,15 @@ tailwind.config = {
   .gallery-card{ transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s; }
   .no-scroll{ overflow:hidden; }
 </style>
-
+    <!-- puter-pwa: generated, do not edit -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Aira">
+    <!-- /puter-pwa -->
 </head>
 <body class="font-body text-ink antialiased">
 
@@ -712,6 +720,28 @@ function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':
 loadWishes();
 
 createIcons({ icons });
+
 </script>
+
+<script>
+(function hidePuterBadge() {
+  const hide = () => {
+    document.querySelectorAll('*').forEach(el => {
+      if (el.textContent.trim() === 'Made with Puter') {
+        el.style.display = 'none';
+      }
+    });
+  };
+
+  hide();
+
+  const observer = new MutationObserver(hide);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+
 </body>
 </html>
