@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<script>
+window.onerror=function(msg,src,line,col,err){window.parent.postMessage({type:'app-error',message:msg,source:src,lineno:line,colno:col,stack:err&&err.stack||''},'*');};
+window.onunhandledrejection=function(e){window.parent.postMessage({type:'app-error',message:'Unhandled promise rejection: '+(e.reason&&e.reason.message||e.reason||'unknown'),stack:e.reason&&e.reason.stack||''},'*');};
+window.addEventListener('error',function(e){var t=e&&e.target;if(t&&t!==window&&t.tagName==='SCRIPT'){var u=t.src||'';window.parent.postMessage({type:'app-error',message:'Failed to load script'+(u?': '+u:' (inline module)'),source:u},'*');}},true);
+(function(){var _f=window.fetch;window.fetch=function(){var a=arguments,u=typeof a[0]==='string'?a[0]:(a[0]&&a[0].url)||'';var p=_f.apply(this,a);p.then(function(r){if(r.status===500){r.clone().text().then(function(b){window.parent.postMessage({type:'fetch-error',url:u,status:500,body:b},'*');}).catch(function(){window.parent.postMessage({type:'fetch-error',url:u,status:500,body:''},'*');});}}).catch(function(e){window.parent.postMessage({type:'fetch-error',url:u,status:0,body:e.message||'fetch failed'},'*');});return p;};})();
+</script>
+<script src="https://builder.puter.com/runtime.js" defer></script>
+<meta name="theme-color" content="#c9768e" />
+<title>Aira Paulyn's Debut | Chung Đôi</title>
+<meta name="description" content="You are cordially invited to celebrate the debut of Aira Paulyn — Saturday, September 12, 2026 · Boss Bebeh Bistro Café, Talisay Branch." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Ubuntu:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        script: ['"Beau Rivage"', 'cursive'],
+        serif: ['"EB Garamond"', 'Georgia', 'serif'],
+        body: ['Ubuntu', 'Arial', 'sans-serif'],
+        lora: ['Lora', 'serif'],
+      },
+      colors: {
+        rose: '#c9768e',
+        rose2: '#d07d95',
+        blush: '#e9b4c4',
+        petal: '#f3d5df',
+        ink: '#804b5b',
+        cream: '#fefefe',
+      },
+    },
+  },
+};
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background:#fdeef2; }
+  .bg-lotus { background-image:url('https://cdn.chungdoi.com/uploads/hoa-sen-bg.webp'); }
+  /* falling petals */
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity:0; }
+    10%  { opacity:.9; }
+    100% { transform: translateY(110vh) translateX(var(--sway,0)) rotate(360deg); opacity:0; }
+  }
+  .petal { position:absolute; top:-40px; will-change:transform; animation:fall linear infinite; }
+  @keyframes sealPulse { 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.06);} }
+  @keyframes shine { 0%{left:-40%;} 60%,100%{left:120%;} }
+  .shine::after{ content:''; position:absolute; top:0; height:100%; width:34px; left:-40%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent); animation:shine 3s ease-in-out infinite; }
+  @keyframes floatUp { 0%{opacity:0; transform:translateY(28px);} 100%{opacity:1; transform:translateY(0);} }
+  .reveal { opacity:0; }
+  .reveal.in { animation:floatUp .9s ease forwards; }
+  .divider-line { height:1px; background:linear-gradient(to right,transparent,#c9768e,transparent); }
+  .frame-corner { position:absolute; width:56px; height:56px; border-color:#c9768e; opacity:.55; }
+  ::selection{ background:#e9b4c4; color:#5a333f; }
+  .gallery-card{ transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s; }
+  .no-scroll{ overflow:hidden; }
+</style>
+    <!-- puter-pwa: generated, do not edit -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Aira">
+    <!-- /puter-pwa -->
+</head>
+<body class="font-body text-ink antialiased">
+
+<!-- ===================== ENVELOPE / OPEN SCREEN ===================== -->
+<div id="envelope" class="fixed inset-0 z-[60] flex items-center justify-center overflow-hidden"
+     style="background:linear-gradient(to bottom right,#c9768e,#d07d95,#e9b4c4);">
+  <div id="petalsIntro" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+  <div class="relative z-10 w-[310px] sm:w-[360px] md:w-[440px] px-2">
+    <div class="relative rounded-xl">
+      <!-- seal -->
+      <div class="absolute left-1/2 -top-1 z-30 flex h-14 w-14 items-center justify-center rounded-full"
+           style="transform:translate(-50%,-50%);background:radial-gradient(circle at 30% 30%,#c9768e,#ab5870);box-shadow:0 4px 20px rgba(201,118,142,.5),inset 0 2px 4px rgba(255,255,255,.3);animation:sealPulse 2s ease-in-out infinite;">
+        <svg viewBox="0 0 24 24" class="w-7 h-7" fill="#fff"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <div class="relative overflow-hidden rounded-xl bg-cream"
+           style="border:1px solid rgba(201,118,142,.18);box-shadow:0 25px 60px -12px rgba(0,0,0,.45);">
+        <div class="relative z-10 text-center px-6 pt-24 pb-12">
+          <p class="font-serif tracking-[0.35em] text-[11px] text-ink/70 uppercase mb-4">The Debut of</p>
+          <h1 class="font-script text-rose leading-none text-[54px]">Aira Paulyn</h1>
+          <div class="flex items-center justify-center gap-3 my-3">
+            <div class="w-10 h-px" style="background:linear-gradient(to right,transparent,#c9768e)"></div>
+            <span class="text-rose/70 text-sm">❦</span>
+            <div class="w-10 h-px" style="background:linear-gradient(to left,transparent,#c9768e)"></div>
+          </div>
+          <p class="font-lora text-rose2/90 text-[17px]">September 12, 2026</p>
+          <p class="font-lora font-light text-rose2/90 text-[16px] mt-4 mb-6">Cordially Invites You</p>
+          <button id="openBtn" class="shine relative overflow-hidden mx-auto flex w-fit items-center gap-2 rounded-full px-8 py-2.5 text-lg font-lora font-medium text-white"
+                  style="background:#c9768e;box-shadow:0 4px 14px rgba(201,118,142,.4);">
+            Open
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MUSIC TOGGLE ===================== -->
+<button id="musicBtn" aria-label="Toggle music"
+        class="fixed top-4 right-4 z-50 hidden h-11 w-11 items-center justify-center rounded-full bg-white/85 backdrop-blur text-rose border border-rose/20 shadow-sm">
+  <svg id="musicIcon" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+  </svg>
+</button>
+<!-- hidden YouTube background music player -->
+<div style="position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;overflow:hidden;pointer-events:none;" aria-hidden="true">
+  <div id="ytPlayer"></div>
+</div>
+
+<!-- ===================== MAIN INVITATION ===================== -->
+<main id="invite" class="mx-auto w-full max-w-[480px] md:max-w-[900px] bg-cream text-ink relative">
+  <div aria-hidden="true" class="bg-lotus pointer-events-none absolute inset-0" style="background-repeat:repeat;background-size:300px auto;opacity:.06;"></div>
+
+  <div class="relative z-10">
+
+  <!-- ---- HERO ---- -->
+  <section class="relative px-6 pt-16 pb-10 text-center overflow-hidden">
+    <span class="petal-bg"></span>
+    <div class="reveal">
+      <p class="font-serif uppercase tracking-[0.4em] text-[11px] text-ink/60">You are invited to the debut of</p>
+      <div class="relative mx-auto mt-8 w-full max-w-[420px] aspect-[3/4] flex flex-col items-center justify-center">
+        <!-- gold frame corners -->
+        <span class="frame-corner left-2 top-2 border-l-2 border-t-2 rounded-tl-xl"></span>
+        <span class="frame-corner right-2 top-2 border-r-2 border-t-2 rounded-tr-xl"></span>
+        <span class="frame-corner left-2 bottom-2 border-l-2 border-b-2 rounded-bl-xl"></span>
+        <span class="frame-corner right-2 bottom-2 border-r-2 border-b-2 rounded-br-xl"></span>
+        <p class="font-serif tracking-[0.3em] text-[11px] text-rose/70 uppercase mb-2">A Tale of Eighteen</p>
+        <h1 class="font-script text-rose leading-[0.95] text-[64px] sm:text-[76px]">Aira<br>Paulyn</h1>
+        <div class="flex items-center justify-center gap-3 mt-4 mb-3">
+          <div class="w-12 h-px" style="background:linear-gradient(to right,transparent,#c9768e)"></div>
+          <span class="text-rose/70">❦</span>
+          <div class="w-12 h-px" style="background:linear-gradient(to left,transparent,#c9768e)"></div>
+        </div>
+        <p class="font-lora text-rose2 text-[18px]">Saturday · September 12, 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- INVITATION MESSAGE / HOSTS ---- -->
+  <section class="reveal px-6 py-10">
+    <div class="mx-auto max-w-[560px] text-center">
+      <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[20px] md:text-[24px] font-semibold">Hosted With Love By</h2>
+      <div class="mx-auto my-6 grid grid-cols-[1fr_auto_1fr] items-center gap-x-5 max-w-[380px] text-center">
+        <div>
+          <p class="font-serif text-[13px] text-ink/70">Mr.</p>
+          <p class="font-medium text-rose text-[15px] mt-1">Samuel V. Lipardo Jr.</p>
+        </div>
+        <div class="h-[54px] w-px self-center" style="background:#c9768e;opacity:.45;"></div>
+        <div>
+          <p class="font-serif text-[13px] text-ink/70">Mrs.</p>
+          <p class="font-medium text-rose text-[15px] mt-1">Ivy Marie Sabanpan</p>
+        </div>
+      </div>
+      <p class="font-serif italic text-rose text-[17px] md:text-[19px] leading-relaxed">
+        Celebrate a magical milestone as Aira turns eighteen. Together with her family,
+        we joyfully invite you to share in an evening of music, memories, and love.
+      </p>
+    </div>
+  </section>
+
+  <!-- ---- 18 ROSES / TREASURES intro banner ---- -->
+  <section class="reveal px-6 py-6 text-center">
+    <div class="mx-auto max-w-[560px] rounded-2xl border border-rose/15 bg-white/60 px-6 py-8">
+      <h3 class="font-script text-rose text-[44px] leading-none">Aira Paulyn</h3>
+      <p class="font-serif uppercase tracking-[0.25em] text-[10px] text-ink/60 mt-2">A Tale of Eighteen</p>
+    </div>
+  </section>
+
+  <!-- ---- PHOTO GALLERY (3D coverflow) ---- -->
+  <section class="reveal px-4 py-10 text-center overflow-hidden">
+    <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[20px] md:text-[24px] font-semibold mb-8">Photo Gallery</h2>
+    <div class="relative mx-auto h-[300px] md:h-[500px] max-w-[600px]" style="perspective:1000px;">
+      <button id="galPrev" aria-label="Previous photo" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-[200] h-9 w-9 items-center justify-center rounded-full bg-white/70 text-rose border border-rose/20">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+      </button>
+      <button id="galNext" aria-label="Next photo" class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-[200] h-9 w-9 items-center justify-center rounded-full bg-white/70 text-rose border border-rose/20">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </button>
+      <div id="galStage" class="relative h-full w-full flex items-center justify-center" style="transform-style:preserve-3d;"></div>
+    </div>
+    <div id="galDots" class="mt-4 flex justify-center gap-1.5"></div>
+  </section>
+
+  <!-- ---- CELEBRATION PARTY INFO ---- -->
+  <section class="reveal px-6 py-10 text-center">
+    <h2 class="font-serif uppercase tracking-[0.12em] text-rose text-[20px] md:text-[24px] font-semibold">Celebration Party Info</h2>
+
+    <p class="font-serif uppercase tracking-[0.12em] text-rose text-[14px] md:text-[15px] font-medium mt-7">The celebration will take place at:</p>
+    <p class="font-serif text-rose text-[24px] md:text-[27px] font-semibold mt-2">6:00 PM</p>
+
+    <!-- date row -->
+    <div class="mx-auto mt-6 flex max-w-[360px] items-center justify-center gap-4 md:gap-6">
+      <span class="font-serif uppercase tracking-[0.12em] text-ink/70 text-[13px] md:text-[14px] flex-1 text-right">Saturday</span>
+      <span class="h-9 w-px bg-rose/40"></span>
+      <span class="font-serif text-rose text-[30px] md:text-[34px] font-semibold leading-none">12</span>
+      <span class="h-9 w-px bg-rose/40"></span>
+      <span class="font-serif uppercase tracking-[0.12em] text-ink/70 text-[13px] md:text-[14px] flex-1 text-left">September</span>
+    </div>
+    <p class="font-serif text-rose text-[19px] md:text-[21px] font-semibold mt-4">2026</p>
+
+    <!-- countdown -->
+    <h3 class="font-serif uppercase tracking-[0.12em] text-rose text-[17px] md:text-[19px] font-semibold mt-9">Countdown</h3>
+    <p id="cdText" class="font-lora text-rose2 text-[16px] md:text-[17px] mt-3">--</p>
+    <p id="cdOver" class="hidden font-lora text-rose2 mt-2">Today is the day! 🎉</p>
+
+    <!-- calendar -->
+    <div class="mx-auto mt-8 max-w-[380px] rounded-2xl border-2 border-[#caa96a]/50 bg-white/60 p-6 relative">
+      <span class="absolute left-1/2 -top-3 -translate-x-1/2 text-[#caa96a] text-sm">❦</span>
+      <p class="font-serif tracking-[0.06em] text-rose text-center text-[15px] font-medium mb-4">September 2026</p>
+      <div class="grid grid-cols-7 gap-1 text-center">
+        <div class="text-[11px] font-medium text-ink/50 py-1">Su</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">Mo</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">Tu</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">We</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">Th</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">Fr</div>
+        <div class="text-[11px] font-medium text-ink/50 py-1">Sa</div>
+      </div>
+      <div id="calGrid" class="grid grid-cols-7 gap-1 text-center mt-1"></div>
+      <a id="calBtn" class="mt-6 inline-block font-serif text-[#caa96a] text-[15px] hover:text-rose transition-colors border-b border-[#caa96a]/50"
+         href="#" target="_blank" rel="noopener">Add to Calendar</a>
+    </div>
+  </section>
+
+  <!-- ---- CELEBRATION PARTY VENUE ---- -->
+  <section class="reveal px-6 py-10 text-center">
+    <div class="mx-auto max-w-[560px]">
+      <button id="rsvpOpen" class="inline-flex items-center gap-2 rounded-full bg-rose px-8 py-2.5 text-white font-serif uppercase tracking-[0.12em] text-[13px] font-medium hover:bg-rose2 transition-colors">
+        Confirm Attendance
+      </button>
+      <h2 class="font-serif uppercase tracking-[0.1em] text-rose text-[20px] md:text-[24px] font-semibold mt-8">Celebration Party Venue</h2>
+      <p class="font-lora text-rose2 text-[17px] mt-3">Boss Bebeh Bistro Café · Talisay Branch</p>
+      <p class="font-body text-ink/60 text-[13px] mt-1">7R5J+QFW Rosalem, 83 National Highway, Talisay, 6045 Cebu, Philippines</p>
+      <div class="mt-5 overflow-hidden rounded-2xl border border-rose/15">
+        <iframe
+          title="Boss Bebeh Bistro Café location"
+          src="https://www.google.com/maps?q=Boss+Bebeh+Bistro+Cafe+Talisay+Cebu&output=embed"
+          class="h-[300px] w-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a href="https://www.google.com/maps/search/Boss+Bebeh+Bistro+Cafe+Talisay+Cebu" target="_blank" rel="noopener"
+         class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-rose/40 px-5 py-2 text-[13px] font-medium text-rose hover:bg-rose hover:text-white transition-colors">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Open in Google Maps
+      </a>
+    </div>
+  </section>
+
+  <!-- ---- DRESS CODE ---- -->
+  <section class="reveal px-6 py-8 text-center">
+    <div class="mx-auto max-w-[560px] rounded-2xl border border-rose/15 bg-white/60 px-6 py-8">
+      <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[18px] font-semibold mb-4">Attire</h2>
+      <p class="font-lora text-rose2 text-[16px]">Semi-formal · Pastel shades of color</p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3">
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#f7d6e0"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#f6e2c9"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#fdf3c7"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#cdeacf"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#c8e6ef"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#cdd3f0"></span>
+        <span class="h-8 w-8 rounded-full ring-1 ring-rose/20" style="background:#e5d4f2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- GIFT BOX ---- -->
+  <section class="reveal px-6 py-10 text-center">
+    <div class="mx-auto max-w-[420px]">
+      <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[20px] md:text-[24px] font-semibold mb-6">Gift Box</h2>
+      <button id="giftOpen" aria-label="Send an e-gift"
+              class="shine relative overflow-hidden mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-rose text-white hover:bg-rose2 transition-colors"
+              style="box-shadow:0 4px 14px rgba(201,118,142,.35);">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zm0 0h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+      </button>
+      <p class="font-serif italic text-rose text-[16px] md:text-[17px] mt-6">
+        Your presence would be the greatest gift I could receive!
+      </p>
+    </div>
+  </section>
+
+  <!-- ---- WISHES SUBMISSION WALL ---- -->
+  <section id="wishesSection" class="reveal px-6 pb-8 pt-4">
+    <div class="mx-auto max-w-[560px]">
+      <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[20px] md:text-[24px] font-semibold text-center mb-2">Wishes for Aira</h2>
+      <p class="font-lora text-rose2 text-center text-[15px] mb-6">Leave a message on the wall for the debutante</p>
+
+      <form id="wishForm" class="rounded-3xl border border-rose/15 bg-white/70 p-6 mb-8 space-y-3">
+        <input name="name" required maxlength="80" placeholder="Your name"
+               class="w-full rounded-xl border border-rose/25 bg-white/80 px-4 py-2.5 text-[15px] outline-none focus:border-rose focus:ring-2 focus:ring-rose/20" />
+        <textarea name="message" required rows="3" maxlength="500" placeholder="Write your wish for Aira…"
+                  class="w-full rounded-xl border border-rose/25 bg-white/80 px-4 py-2.5 text-[15px] outline-none focus:border-rose focus:ring-2 focus:ring-rose/20 resize-none"></textarea>
+        <button type="submit" id="wishSubmit"
+                class="w-full rounded-full bg-rose py-3 text-white font-lora text-[16px] font-medium hover:bg-rose2 transition-colors disabled:opacity-60">
+          Post Wish
+        </button>
+        <p id="wishMsg" class="hidden text-center text-[14px] font-medium"></p>
+      </form>
+
+      <div id="wishes" class="space-y-3">
+        <p id="wishesEmpty" class="text-center font-lora text-ink/50 text-[15px]">Be the first to leave a wish 💐</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- FOOTER ---- -->
+  <footer class="reveal px-6 pt-8 pb-12 text-center">
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <div class="w-12 h-px" style="background:linear-gradient(to right,transparent,#c9768e)"></div>
+      <span class="text-rose/70">❦</span>
+      <div class="w-12 h-px" style="background:linear-gradient(to left,transparent,#c9768e)"></div>
+    </div>
+    <h3 class="font-script text-rose text-[42px] leading-none">Aira Paulyn</h3>
+    <p class="font-lora text-rose2 mt-2 text-[15px]">September 12, 2026 · Talisay</p>
+    <p class="font-serif italic text-ink/50 text-[13px] mt-4">Made with love · Chung Đôi</p>
+  </footer>
+
+  </div>
+</main>
+
+<!-- ===================== GIFT QR MODAL ===================== -->
+<div id="giftModal" class="fixed inset-0 z-[70] hidden items-center justify-center px-6">
+  <div id="giftBackdrop" class="absolute inset-0 bg-ink/50 backdrop-blur-sm"></div>
+  <div id="giftCard" class="relative z-10 w-full max-w-[340px] rounded-3xl bg-cream p-7 text-center"
+       style="box-shadow:0 25px 60px -12px rgba(0,0,0,.4);border:1px solid rgba(201,118,142,.18);transform:scale(.94);opacity:0;transition:transform .3s ease,opacity .3s ease;">
+    <button id="giftClose" aria-label="Close" class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-ink/50 hover:bg-rose/10 hover:text-rose transition-colors">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="flex items-center justify-center gap-3 mb-4 mt-1">
+      <div class="w-8 h-px" style="background:linear-gradient(to right,transparent,#c9768e)"></div>
+      <span class="text-rose/70 text-sm">❦</span>
+      <div class="w-8 h-px" style="background:linear-gradient(to left,transparent,#c9768e)"></div>
+    </div>
+    <h3 class="font-serif uppercase tracking-[0.15em] text-rose text-[17px] font-semibold">Send an E-Gift</h3>
+    <p class="font-lora text-rose2 text-[14px] mt-1 mb-5">Scan the QR code with your GCash app</p>
+    <div class="mx-auto flex h-[230px] w-[230px] items-center justify-center rounded-2xl bg-white p-3 ring-1 ring-rose/15">
+      <img id="giftQr" src="assets/qr_code.png" alt="GCash e-gift QR code" class="h-full w-full object-contain" width="230" height="230" loading="lazy" />
+    </div>
+    <p class="font-lora text-rose text-[16px] mt-5">GCash · Aira Paulyn</p>
+    <p class="font-body text-ink/70 text-[15px] mt-1 tracking-wide">0924 539 0330</p>
+    <button id="copyGift" class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-rose/40 px-5 py-2 text-[13px] font-medium text-rose hover:bg-rose hover:text-white transition-colors">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span id="copyGiftTxt">Copy number</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== RSVP MODAL ===================== -->
+<div id="rsvpModal" class="fixed inset-0 z-[70] hidden items-center justify-center px-6">
+  <div id="rsvpBackdrop" class="absolute inset-0 bg-ink/50 backdrop-blur-sm"></div>
+  <div id="rsvpCard" class="relative z-10 w-full max-w-[440px] max-h-[90vh] overflow-y-auto rounded-3xl bg-cream p-7 md:p-8"
+       style="box-shadow:0 25px 60px -12px rgba(0,0,0,.4);border:1px solid rgba(201,118,142,.18);transform:scale(.94);opacity:0;transition:transform .3s ease,opacity .3s ease;">
+    <button id="rsvpClose" aria-label="Close" class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-ink/50 hover:bg-rose/10 hover:text-rose transition-colors">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="flex items-center justify-center gap-3 mb-3 mt-1">
+      <div class="w-8 h-px" style="background:linear-gradient(to right,transparent,#c9768e)"></div>
+      <span class="text-rose/70 text-sm">❦</span>
+      <div class="w-8 h-px" style="background:linear-gradient(to left,transparent,#c9768e)"></div>
+    </div>
+    <h2 class="font-serif uppercase tracking-[0.15em] text-rose text-[20px] font-semibold text-center">Kindly RSVP</h2>
+    <p class="font-lora text-rose2 text-center text-[14px] mt-2 mb-6">Please respond on or before September 1, 2026</p>
+
+    <form id="rsvpForm" class="space-y-4">
+      <div>
+        <label class="block text-[13px] font-medium text-ink/70 mb-1.5">Full name</label>
+        <input name="name" required maxlength="80" placeholder="Your name"
+               class="w-full rounded-xl border border-rose/25 bg-white/80 px-4 py-2.5 text-[15px] outline-none focus:border-rose focus:ring-2 focus:ring-rose/20" />
+      </div>
+      <div>
+        <label class="block text-[13px] font-medium text-ink/70 mb-1.5">Will you attend?</label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="cursor-pointer">
+            <input type="radio" name="attending" value="yes" class="peer sr-only" checked />
+            <div class="rounded-xl border border-rose/25 py-2.5 text-center text-[15px] peer-checked:bg-rose peer-checked:text-white peer-checked:border-rose transition-colors">Joyfully Accept</div>
+          </label>
+          <label class="cursor-pointer">
+            <input type="radio" name="attending" value="no" class="peer sr-only" />
+            <div class="rounded-xl border border-rose/25 py-2.5 text-center text-[15px] peer-checked:bg-rose peer-checked:text-white peer-checked:border-rose transition-colors">Regretfully Decline</div>
+          </label>
+        </div>
+      </div>
+      <div id="guestsWrap">
+        <label class="block text-[13px] font-medium text-ink/70 mb-1.5">Number of guests (incl. you)</label>
+        <input name="guests" type="number" min="1" max="20" value="1"
+               class="w-full rounded-xl border border-rose/25 bg-white/80 px-4 py-2.5 text-[15px] outline-none focus:border-rose focus:ring-2 focus:ring-rose/20" />
+      </div>
+      <button type="submit" id="rsvpSubmit"
+              class="w-full rounded-full bg-rose py-3 text-white font-lora text-[16px] font-medium hover:bg-rose2 transition-colors disabled:opacity-60">
+        Send RSVP
+      </button>
+      <p id="rsvpMsg" class="hidden text-center text-[14px] font-medium"></p>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { createIcons, icons } from 'https://cdn.jsdelivr.net/npm/lucide@latest/+esm';
+
+const WORKER = 'https://aira-debut-rsvp.puter.work';
+const PHOTOS = [
+  'https://cdn.chungdoi.com/uploads/cf57c00a-d878-4eca-9711-e55e1feb2e13.jpg',
+  'https://cdn.chungdoi.com/uploads/8b5b2c30-58f5-47e8-bb14-57ea540dbec9.jpg',
+  'assets/baby_me_1.jpg',
+  'assets/baby_me_3.jpg',
+  'assets/baby_me_2.jpg',
+];
+const EVENT = new Date('2026-09-12T18:00:00+08:00');
+
+/* ---------- falling petals ---------- */
+function makePetals(container, count) {
+  const colors = ['#f3d5df','#e9b4c4','#d07d95','#c9768e','#ffffff'];
+  for (let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className = 'petal';
+    el.textContent = '🌸';
+    el.style.left = (Math.random()*100)+'%';
+    el.style.fontSize = (10+Math.random()*9)+'px';
+    el.style.color = colors[i%colors.length];
+    el.style.setProperty('--sway',(Math.random()*60-30)+'px');
+    el.style.animationDuration = (8+Math.random()*5)+'s';
+    el.style.animationDelay = (Math.random()*8)+'s';
+    container.appendChild(el);
+  }
+}
+makePetals(document.getElementById('petalsIntro'), 14);
+
+/* ---------- YouTube background music ---------- */
+const VIDEO_ID = '1YqlO_4rVuY';
+const MUSIC_START = 82; // start at 1:22 per the shared link
+let ytReady = false, ytPlayer = null, musicOn = false, pendingPlay = false;
+
+// load the IFrame API
+(function(){
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+window.onYouTubeIframeAPIReady = function(){
+  ytPlayer = new YT.Player('ytPlayer', {
+    videoId: VIDEO_ID,
+    playerVars: { autoplay:0, controls:0, disablekb:1, fs:0, modestbranding:1, playsinline:1, rel:0, start: MUSIC_START },
+    events: {
+      onReady: ()=>{ ytReady = true; if (pendingPlay) playMusic(); },
+      onStateChange: (e)=>{ if (e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(MUSIC_START); ytPlayer.playVideo(); } }
+    }
+  });
+};
+function playMusic(){
+  if(!ytReady || !ytPlayer){ pendingPlay = true; return; }
+  pendingPlay = false;
+  try { ytPlayer.seekTo(MUSIC_START, true); ytPlayer.unMute(); ytPlayer.setVolume(60); ytPlayer.playVideo(); } catch(e){}
+}
+function pauseMusic(){ if(ytReady && ytPlayer){ try { ytPlayer.pauseVideo(); } catch(e){} } }
+
+/* ---------- envelope open ---------- */
+const envelope = document.getElementById('envelope');
+const musicBtn = document.getElementById('musicBtn');
+document.body.classList.add('no-scroll');
+
+function setMusic(on){
+  musicOn = on;
+  if (on){ playMusic(); } else { pauseMusic(); }
+  musicBtn.style.opacity = on ? '1' : '0.6';
+  musicBtn.setAttribute('aria-label', on ? 'Mute music' : 'Play music');
+  musicBtn.classList.toggle('animate-pulse', on);
+}
+document.getElementById('openBtn').addEventListener('click', ()=>{
+  envelope.style.transition = 'opacity .8s ease, transform .8s ease';
+  envelope.style.opacity = '0';
+  envelope.style.transform = 'scale(1.05)';
+  setTimeout(()=>{ envelope.remove(); }, 800);
+  document.body.classList.remove('no-scroll');
+  musicBtn.classList.remove('hidden');
+  musicBtn.classList.add('flex');
+  setMusic(true);
+  runReveal();
+});
+musicBtn.addEventListener('click', ()=> setMusic(!musicOn));
+
+/* ---------- scroll reveal ---------- */
+function runReveal(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+
+/* ---------- countdown ---------- */
+const cdText = document.getElementById('cdText');
+const cdOver = document.getElementById('cdOver');
+function tick(){
+  const diff = EVENT - new Date();
+  if (diff <= 0){ cdText.classList.add('hidden'); cdOver.classList.remove('hidden'); return; }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor(diff/3600000)%24;
+  const m = Math.floor(diff/60000)%60;
+  const s = Math.floor(diff/1000)%60;
+  cdText.textContent = `${d} days ${h} hours ${m} min ${s} sec`;
+}
+tick(); setInterval(tick,1000);
+
+/* ---------- gallery coverflow ---------- */
+const stage = document.getElementById('galStage');
+const dotsWrap = document.getElementById('galDots');
+let gi = 0;
+stage.innerHTML = PHOTOS.map((src,i)=>`
+  <div class="gallery-card absolute aspect-[3/4] w-[clamp(160px,58%,260px)] md:w-[clamp(300px,64%,380px)] rounded-2xl overflow-hidden ring-2 ring-white/40 shadow-xl cursor-pointer" data-i="${i}">
+    <img src="${src}" alt="Aira photo ${i+1}" class="h-full w-full object-cover" loading="lazy"/>
+  </div>`).join('');
+dotsWrap.innerHTML = PHOTOS.map((_,i)=>`<button aria-label="Go to photo ${i+1}" data-dot="${i}" class="rounded-full transition-all duration-300 h-2 bg-rose"></button>`).join('');
+function layoutGallery(){
+  [...stage.children].forEach((card,i)=>{
+    let off = i - gi;
+    const n = PHOTOS.length;
+    if (off > n/2) off -= n; if (off < -n/2) off += n;
+    const abs = Math.abs(off);
+    card.style.transform = `translateX(${off*60}%) translateZ(${off===0?0:-150}px) rotateY(${off*-40}deg) scale(${off===0?1:0.85})`;
+    card.style.opacity = abs>1 ? '0' : (off===0?'1':'0.7');
+    card.style.zIndex = 100 - abs;
+    card.style.pointerEvents = abs>1 ? 'none':'auto';
+  });
+  [...dotsWrap.children].forEach((d,i)=>{
+    d.style.width = i===gi ? '24px' : '8px';
+    d.style.opacity = i===gi ? '0.8' : '0.3';
+  });
+}
+function go(n){ gi = (n + PHOTOS.length) % PHOTOS.length; layoutGallery(); }
+layoutGallery();
+document.getElementById('galPrev').addEventListener('click', ()=>go(gi-1));
+document.getElementById('galNext').addEventListener('click', ()=>go(gi+1));
+dotsWrap.addEventListener('click', e=>{ const b=e.target.closest('[data-dot]'); if(b) go(+b.dataset.dot); });
+stage.addEventListener('click', e=>{ const c=e.target.closest('[data-i]'); if(c && +c.dataset.i!==gi) go(+c.dataset.i); });
+// swipe
+let sx=null;
+stage.addEventListener('touchstart', e=>sx=e.touches[0].clientX, {passive:true});
+stage.addEventListener('touchend', e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) go(dx<0?gi+1:gi-1); sx=null; });
+
+/* ---------- RSVP modal ---------- */
+const form = document.getElementById('rsvpForm');
+const rsvpMsg = document.getElementById('rsvpMsg');
+const guestsWrap = document.getElementById('guestsWrap');
+const rsvpModal = document.getElementById('rsvpModal');
+const rsvpCard = document.getElementById('rsvpCard');
+function openRsvp(){
+  rsvpMsg.classList.add('hidden');
+  rsvpModal.classList.remove('hidden');
+  rsvpModal.classList.add('flex');
+  document.body.classList.add('no-scroll');
+  requestAnimationFrame(()=>{ rsvpCard.style.opacity='1'; rsvpCard.style.transform='scale(1)'; });
+}
+function closeRsvp(){
+  rsvpCard.style.opacity='0'; rsvpCard.style.transform='scale(.94)';
+  document.body.classList.remove('no-scroll');
+  setTimeout(()=>{ rsvpModal.classList.add('hidden'); rsvpModal.classList.remove('flex'); }, 280);
+}
+document.getElementById('rsvpOpen').addEventListener('click', openRsvp);
+document.getElementById('rsvpClose').addEventListener('click', closeRsvp);
+document.getElementById('rsvpBackdrop').addEventListener('click', closeRsvp);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !rsvpModal.classList.contains('hidden')) closeRsvp(); });
+
+form.addEventListener('change', ()=>{
+  const yes = form.querySelector('input[name="attending"]:checked').value === 'yes';
+  guestsWrap.style.display = yes ? '' : 'none';
+});
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const btn = document.getElementById('rsvpSubmit');
+  const data = {
+    name: form.name.value.trim(),
+    attending: form.querySelector('input[name="attending"]:checked').value === 'yes',
+    guests: form.guests.value,
+  };
+  if (!data.name){ return; }
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await fetch(WORKER + '/rsvp', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)
+    });
+    if(!res.ok) throw new Error('bad');
+    rsvpMsg.textContent = data.attending
+      ? 'Thank you! Aira can\u2019t wait to celebrate with you 💗'
+      : 'Thank you for letting us know — you\u2019ll be missed 💗';
+    rsvpMsg.className = 'text-center text-[14px] font-medium text-rose';
+    rsvpMsg.classList.remove('hidden');
+    form.reset(); guestsWrap.style.display = '';
+  } catch(err){
+    rsvpMsg.textContent = 'Something went wrong. Please try again.';
+    rsvpMsg.className = 'text-center text-[14px] font-medium text-red-500';
+    rsvpMsg.classList.remove('hidden');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send RSVP';
+  }
+});
+
+/* ---------- calendar ---------- */
+const calGrid = document.getElementById('calGrid');
+(function buildCalendar(){
+  const firstDay = new Date(2026, 8, 1).getDay(); // Sept 2026, 0=Sun
+  const daysInMonth = 30;
+  let html = '';
+  for (let i=0;i<firstDay;i++) html += '<div></div>';
+  for (let d=1; d<=daysInMonth; d++){
+    const marked = d === 12;
+    if (marked){
+      html += `<div class="py-1.5 flex items-center justify-center">
+        <span class="relative flex h-9 w-9 items-center justify-center text-[13px] font-semibold text-white">
+          <svg class="absolute inset-0 h-full w-full" viewBox="0 0 24 24" fill="#c9768e"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span class="relative">${d}</span>
+        </span>
+      </div>`;
+    } else {
+      html += `<div class="py-1.5 flex items-center justify-center">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full text-[13px] text-ink/70">${d}</span>
+      </div>`;
+    }
+  }
+  calGrid.innerHTML = html;
+})();
+// Add-to-calendar (Google Calendar link)
+(function(){
+  const start = '20260912T100000Z'; // 18:00 PH time (UTC+8) => 10:00 UTC
+  const end   = '20260912T140000Z';
+  const url = 'https://www.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent('Aira Paulyn\u2019s Debut')
+    + '&dates=' + start + '/' + end
+    + '&details=' + encodeURIComponent('You are cordially invited to the debut of Aira Paulyn.')
+    + '&location=' + encodeURIComponent('Boss Bebeh Bistro Café - Talisay Branch');
+  document.getElementById('calBtn').href = url;
+})();
+
+/* ---------- e-gift QR modal ---------- */
+(function(){
+  const modal = document.getElementById('giftModal');
+  const card = document.getElementById('giftCard');
+  function openGift(){
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.classList.add('no-scroll');
+    requestAnimationFrame(()=>{ card.style.opacity='1'; card.style.transform='scale(1)'; });
+  }
+  function closeGift(){
+    card.style.opacity='0'; card.style.transform='scale(.94)';
+    document.body.classList.remove('no-scroll');
+    setTimeout(()=>{ modal.classList.add('hidden'); modal.classList.remove('flex'); }, 280);
+  }
+  document.getElementById('giftOpen').addEventListener('click', openGift);
+  document.getElementById('giftClose').addEventListener('click', closeGift);
+  document.getElementById('giftBackdrop').addEventListener('click', closeGift);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !modal.classList.contains('hidden')) closeGift(); });
+
+  const copyBtn = document.getElementById('copyGift');
+  const copyTxt = document.getElementById('copyGiftTxt');
+  copyBtn.addEventListener('click', async ()=>{
+    try { await navigator.clipboard.writeText('0917 000 0000'); copyTxt.textContent = 'Copied!'; }
+    catch(e){ copyTxt.textContent = 'Copied!'; }
+    setTimeout(()=> copyTxt.textContent = 'Copy number', 1800);
+  });
+})();
+
+/* ---------- wishes submission wall ---------- */
+const wishesEl = document.getElementById('wishes');
+const wishesEmpty = document.getElementById('wishesEmpty');
+const wishForm = document.getElementById('wishForm');
+const wishMsg = document.getElementById('wishMsg');
+
+async function loadWishes(){
+  try {
+    const res = await fetch(WORKER + '/wishes');
+    if(!res.ok) return;
+    const { wishes } = await res.json();
+    wishesEl.querySelectorAll('.wish').forEach(n=>n.remove());
+    if(!wishes || !wishes.length){ wishesEmpty.style.display=''; return; }
+    wishesEmpty.style.display='none';
+    wishes.forEach(r=>{
+      const div = document.createElement('div');
+      div.className = 'wish rounded-2xl border border-rose/15 bg-white/70 px-5 py-4';
+      div.innerHTML = `<p class="font-serif italic text-rose text-[16px]">"${escapeHtml(r.message)}"</p>
+        <p class="text-right text-[13px] text-ink/60 mt-2">— ${escapeHtml(r.name)}</p>`;
+      wishesEl.appendChild(div);
+    });
+  } catch(e){}
+}
+wishForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const btn = document.getElementById('wishSubmit');
+  const data = { name: wishForm.name.value.trim(), message: wishForm.message.value.trim() };
+  if(!data.name || !data.message) return;
+  btn.disabled = true; btn.textContent = 'Posting…';
+  try {
+    const res = await fetch(WORKER + '/wish', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)
+    });
+    if(!res.ok) throw new Error('bad');
+    wishMsg.textContent = 'Your wish has been added to the wall 💗';
+    wishMsg.className = 'text-center text-[14px] font-medium text-rose';
+    wishMsg.classList.remove('hidden');
+    wishForm.reset();
+    loadWishes();
+  } catch(err){
+    wishMsg.textContent = 'Something went wrong. Please try again.';
+    wishMsg.className = 'text-center text-[14px] font-medium text-red-500';
+    wishMsg.classList.remove('hidden');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Post Wish';
+  }
+});
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+loadWishes();
+
+createIcons({ icons });
+</script>
+</body>
+</html>
