@@ -10,6 +10,13 @@ window.addEventListener('error',function(e){var t=e&&e.target;if(t&&t!==window&&
 (function(){var _f=window.fetch;window.fetch=function(){var a=arguments,u=typeof a[0]==='string'?a[0]:(a[0]&&a[0].url)||'';var p=_f.apply(this,a);p.then(function(r){if(r.status===500){r.clone().text().then(function(b){window.parent.postMessage({type:'fetch-error',url:u,status:500,body:b},'*');}).catch(function(){window.parent.postMessage({type:'fetch-error',url:u,status:500,body:''},'*');});}}).catch(function(e){window.parent.postMessage({type:'fetch-error',url:u,status:0,body:e.message||'fetch failed'},'*');});return p;};})();
 </script>
 
+<!-- Favicon -->
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e9b4c4'/%3E%3Ctext x='50' y='67' text-anchor='middle' font-size='62' font-family='serif' fill='%23c9768e'%3EA%3C/text%3E%3C/svg%3E"
+/>
+
 <meta name="theme-color" content="#c9768e" />
 <title>Aira Paulyn's Debut | 18th</title>
 <meta name="description" content="You are cordially invited to celebrate the debut of Aira Paulyn — Saturday, September 12, 2026 · Boss Bebeh Bistro Café, Talisay Branch." />
