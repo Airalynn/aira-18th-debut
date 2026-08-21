@@ -703,17 +703,34 @@ async function loadWishes(){
   try {
     const res = await fetch(WORKER + '/wishes');
     if(!res.ok) return;
+
     const { wishes } = await res.json();
+
     wishesEl.querySelectorAll('.wish').forEach(n=>n.remove());
-    if(!wishes || !wishes.length){ wishesEmpty.style.display=''; return; }
+
+    if(!wishes || !wishes.length){
+      wishesEmpty.style.display='';
+      return;
+    }
+
     wishesEmpty.style.display='none';
-    wishes.forEach(r=>{
-      const div = document.createElement('div');
-      div.className = 'wish rounded-2xl border border-rose/15 bg-white/70 px-5 py-4';
-      div.innerHTML = `<p class="font-serif italic text-rose text-[16px]">"${escapeHtml(r.message)}"</p>
-        <p class="text-right text-[13px] text-ink/60 mt-2">— ${escapeHtml(r.name)}</p>`;
-      wishesEl.appendChild(div);
-    });
+
+    wishes
+      .filter(r => !(
+        (r.name.trim() === 'Aira' && r.message.trim() === 'Happyyy') ||
+        (r.name.trim() === 'CLICK ME' && r.message.trim() === 'wattt')
+      ))
+      .forEach(r=>{
+        const div = document.createElement('div');
+
+        div.className = 'wish rounded-2xl border border-rose/15 bg-white/70 px-5 py-4';
+
+        div.innerHTML = `<p class="font-serif italic text-rose text-[16px]">"${escapeHtml(r.message)}"</p>
+          <p class="text-right text-[13px] text-ink/60 mt-2">— ${escapeHtml(r.name)}</p>`;
+
+        wishesEl.appendChild(div);
+      });
+
   } catch(e){}
 }
 wishForm.addEventListener('submit', async (e)=>{
